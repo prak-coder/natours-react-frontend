@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  /* Natours Brand Color Palette Variables */
+  --color-natours-green-light: #7ed56f;
+  --color-natours-green: #55c57a;
+  --color-natours-green-dark: #28b485;
+
+  --color-natours-grey-light-1: #f7f7f7;
+  --color-natours-grey-light-2: #eee;
+  --color-natours-grey-dark-1: #777;
+  --color-natours-grey-dark-2: #999;
+  --color-natours-grey-dark-3: #333;
+
+  /* Typography Structure */
+  --font-sans: "Lato", sans-serif;
+}
+
+/* Custom CSS Global Layer Rules */
+body {
+  color: var(--color-natours-grey-dark-3);
+  background-color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  padding: 2rem;
+}
+
+/* Reusable Utilities (Example: Header Gradient Text) */
+@utility text-gradient {
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--color-natours-green-light),
+    var(--color-natours-green-dark)
+  );
+}
