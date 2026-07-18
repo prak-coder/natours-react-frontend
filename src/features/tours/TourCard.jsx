@@ -8,8 +8,9 @@ export default function TourCard({ tour }) {
     summary,
     startDates,
     locations,
+    startLocation,
   } = tour;
-
+  console.log(tour);
   const dateStr = startDates
     ? new Date(startDates).toLocaleDateString("en-US", {
         month: "long",
@@ -66,7 +67,12 @@ export default function TourCard({ tour }) {
         <div className="grid grid-cols-2 gap-y-4 text-xs text-gray-600 font-light">
           <div className="flex items-center gap-2">
             <span className="text-emerald-500">📍</span>
-            <span>{locations?.description || "Miami, USA"}</span>
+            <span>
+              {" "}
+              {startLocation?.description ||
+                locations?.[0]?.description ||
+                "Miami, USA"}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-emerald-500">🗓️</span>
