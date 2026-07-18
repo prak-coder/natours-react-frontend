@@ -1,7 +1,6 @@
 import { useTours } from "../hooks/useTours";
 import TourCard from "../features/tours/TourCard";
 
-// Ensure "default" is included here
 export default function ToursOverview() {
   const { tours, isLoading, error } = useTours();
 
@@ -30,10 +29,29 @@ export default function ToursOverview() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-4 py-8">
-      {tours.map((tour) => (
-        <TourCard key={tour._id || tour.id} tour={tour} />
-      ))}
-    </div>
+    <section className="bg-gray-50 py-24 px-4 font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Heading */}
+        {/* <div className="text-center mb-20">
+          <h2 className="inline-block text-3xl font-bold tracking-[0.2rem] uppercase bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent hover:skew-y-2 hover:skew-x-12 hover:scale-110 transition-all duration-200 cursor-pointer">
+            Exciting tours for adventurous people
+          </h2>
+        </div> */}
+
+        {/* Cards Layout Container */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-5xl mx-auto mb-16">
+          {tours.map((tour) => (
+            <TourCard key={tour._id || tour.id} tour={tour} />
+          ))}
+        </div>
+
+        {/* Bottom CTA Button Container */}
+        <div className="text-center">
+          <button className="uppercase bg-emerald-500 text-white font-medium px-10 py-4 rounded-full text-base tracking-wider inline-block hover:-translate-y-1 hover:shadow-[0_1rem_2rem_rgba(0,0,0,0.15)] active:-translate-y-0.5 active:shadow-[0_0.5rem_1rem_rgba(0,0,0,0.15)] transition-all duration-200">
+            Discover all tours
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

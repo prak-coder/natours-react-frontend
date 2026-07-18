@@ -1,6 +1,6 @@
 import { useTours } from "./useTours";
 import TourCard from "./TourCard";
-import Spinner from "../../components/ui/Spinner"; // Assuming this exists in your structure
+// import Spinner from "../../components/ui/Spinner"; // Assuming this exists in your structure
 
 export default function TourGrid() {
   const { tours, isLoading, error } = useTours();
@@ -9,7 +9,7 @@ export default function TourGrid() {
     return (
       <div className="flex h-64 items-center justify-center">
         {/* Replace with your specific <Spinner /> component */}
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600"></div>
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-600"></div>
       </div>
     );
   }
@@ -23,7 +23,8 @@ export default function TourGrid() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    /* Increased spacing to gap-14 and added extreme padding offsets to give cards breathing room */
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-14 max-w-[114rem] mx-auto px-16 py-20 bg-[#f7f7f7]">
       {tours.map((tour) => (
         <TourCard key={tour._id || tour.id} tour={tour} />
       ))}
