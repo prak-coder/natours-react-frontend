@@ -6,6 +6,8 @@ import Footer from "./components/layout/Footer";
 import ToursOverview from "./pages/ToursOverview";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import MeDashboard from "./pages/MeDashboard";
+import ProtectedRoute from "./features/authentication/ProtectedRoute";
 
 export default function App() {
   // const [message, setMessage] = useState("Loading...");
@@ -25,6 +27,14 @@ export default function App() {
             {/* Authentication Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/me"
+              element={
+                <ProtectedRoute>
+                  <MeDashboard />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
 

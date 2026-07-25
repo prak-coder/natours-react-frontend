@@ -22,3 +22,14 @@ export async function signupApi({ name, email, password, passwordConfirm }) {
   });
   return res.data; // Returns 'token' and 'data.user' from Jonas's API schema
 }
+
+// 4. Update Current User Profile Data (Handles both text and file uploads)
+export async function updateMeApi(formData) {
+  const res = await apiClient.patch("/users/updateMe", formData, {
+    headers: {
+      // ⚡ REQUIRED for Multer file uploads on your Express backend
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data.data.user;
+}
