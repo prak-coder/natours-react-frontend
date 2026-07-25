@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
  * @property {boolean} isAuthenticated
  * @property {boolean} isLoading
  * @property {function(string, string): Promise<void>} login
+ * @property {function(string, string, string, string): Promise<void>} signup
  * @property {function(): void} logout
  */
 

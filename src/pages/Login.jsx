@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
@@ -7,6 +8,7 @@ export default function Login() {
   const [formError, setFormError] = useState("");
 
   const { login, isLoading } = useAuth();
+  const navigate = useNavigate(); // 2. INITIALIZE THE NAVIGATOR
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ export default function Login() {
       // ⚡ Invokes your centralized Context login flow
       await login(email, password);
       // Optional: Add routing redirect here (e.g., navigate('/'))
+      navigate("/");
     } catch (err) {
       // 🔍 Safely reads your chained error cause messages
       setFormError(err.message);

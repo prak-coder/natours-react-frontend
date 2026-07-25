@@ -11,3 +11,14 @@ export async function getMeApi() {
   const res = await apiClient.get("/users/me");
   return res.data.data?.data || null;
 }
+
+// 3. Submit registration details to create a brand new account
+export async function signupApi({ name, email, password, passwordConfirm }) {
+  const res = await apiClient.post("/users/signup", {
+    name,
+    email,
+    password,
+    passwordConfirm,
+  });
+  return res.data; // Returns 'token' and 'data.user' from Jonas's API schema
+}

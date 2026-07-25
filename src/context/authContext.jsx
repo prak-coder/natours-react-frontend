@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { loginApi, getMeApi } from "../services/apiauth";
+import { loginApi, getMeApi, signupApi } from "../services/apiauth";
 
 export const AuthContext = createContext();
 
@@ -50,6 +50,25 @@ export function AuthProvider({ children }) {
     } finally {
       setIsLoading(false);
     }
+  }; // 2. Inside the AuthProvider component body, add this logic below your login function:
+  const signup = async (name, email, password, passwordConfirm) => {
+    setIsLoading(true);
+    try {
+      const data = await signupApi({ name, email, password, passwordConfirm });
+      localStorage.setItem("token", data.token);
+      setUser(data.data.user);
+      setIsAuthenticated(true);
+    } catch (err) {
+      setIsAuthenticated(false);
+      throw new Error(
+        err.response?.data?.message || "Registration failed. Try again!",
+        {
+          cause: err,
+        },
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Close session instantly
@@ -61,7 +80,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, login, logout }}
+      value={{ user, isAuthenticated, isLoading, login, logout, signup }}
     >
       {children}
     </AuthContext.Provider>
