@@ -1,16 +1,17 @@
 import { useTours } from "./useTours";
 import TourCard from "./TourCard";
-// import Spinner from "../../components/ui/Spinner"; // Assuming this exists in your structure
+import Spinner from "../../components/ui/Spinner"; // Assuming this exists in your structure
 
 export default function TourGrid() {
   const { tours, isLoading, error } = useTours();
 
   if (isLoading) {
     return (
-      <div className="flex h-64 items-center justify-center">
-        {/* Replace with your specific <Spinner /> component */}
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-600"></div>
-      </div>
+      <Spinner />
+      // <div className="flex h-64 items-center justify-center">
+      //   {/* Replace with your specific <Spinner /> component */}
+      //   <div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-600"></div>
+      // </div>
     );
   }
 

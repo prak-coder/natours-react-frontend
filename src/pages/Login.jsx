@@ -1,75 +1,79 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState("");
 
-  const handleSubmit = (e) => {
+  const { login, isLoading } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Connect your login API call logic here
-    console.log("Logging in with:", { email, password });
+    setFormError(""); // Reset any prior error banners
+
+    try {
+      // ⚡ Invokes your centralized Context login flow
+      await login(email, password);
+      // Optional: Add routing redirect here (e.g., navigate('/'))
+    } catch (err) {
+      // 🔍 Safely reads your chained error cause messages
+      setFormError(err.message);
+    }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-140px)] bg-[#f7f7f7] px-4 py-12">
-      {/* Form Container Wrapper */}
-      <div className="w-full max-w-[34rem] bg-white p-10 md:p-14 rounded-md shadow-[0_2.5rem_8rem_rgba(0,0,0,0.06)]">
-        {/* <div className="w-full max-w-[55rem] bg-white p-14 rounded-lg shadow-[0_2.5rem_8rem_rgba(0,0,0,0.06)]"> */}
-        <h2 className="text-2xl font-bold uppercase tracking-wider text-gradient mb-9">
+    <main className="min-h-[80vh] bg-natours-grey-light-1 flex items-center justify-center px-4 font-sans">
+      <div className="bg-white max-w-md w-full py-12 px-10 rounded-lg shadow-xl border border-gray-100">
+        <h2 className="text-2xl font-bold uppercase text-gradient tracking-wider text-center mb-8">
           Log into your account
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-7">
-          {/* Email Form Group */}
-          <div className="flex flex-col space-y-2">
-            <label
-              className="text-sm font-bold text-[#333] tracking-wide"
-              htmlFor="email"
-            >
-              Email address
+        {formError && (
+          <div className="mb-6 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md text-center font-medium">
+            ❌ {formError}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-bold uppercase tracking-wide text-natours-grey-dark-1">
+              Email Address
             </label>
             <input
-              id="email"
               type="email"
               required
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-[#f2f2f2] border-3 border-transparent rounded px-5 py-4 text-base font-sans text-inherit focus:outline-none focus:bg-white focus:border-natours-green transition-all duration-300 placeholder:text-[#bbb]"
+              className="w-full bg-natours-grey-light-1 border border-transparent rounded px-4 py-3 text-sm focus:bg-white focus:border-natours-green outline-none transition-all duration-200"
             />
           </div>
 
-          {/* Password Form Group */}
-          <div className="flex flex-col space-y-2">
-            <label
-              className="text-sm font-bold text-[#333] tracking-wide"
-              htmlFor="password"
-            >
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-bold uppercase tracking-wide text-natours-grey-dark-1">
               Password
             </label>
             <input
-              id="password"
               type="password"
               required
-              minLength="8"
+              minLength={8}
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-[#f2f2f2] border-3 border-transparent rounded px-5 py-4 text-base font-sans text-inherit focus:outline-none focus:bg-white focus:border-natours-green transition-all duration-300 placeholder:text-[#bbb]"
+              className="w-full bg-natours-grey-light-1 border border-transparent rounded px-4 py-3 text-sm focus:bg-white focus:border-natours-green outline-none transition-all duration-200"
             />
           </div>
 
-          {/* Form Action Button */}
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="bg-natours-green text-white font-normal uppercase text-sm tracking-wider rounded-full px-12 py-4 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 transition-all duration-200 cursor-pointer"
-            >
-              Login
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full mt-4 uppercase bg-natours-green hover:bg-natours-green-dark text-white font-medium py-3 rounded-full text-sm tracking-widest shadow-md transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }

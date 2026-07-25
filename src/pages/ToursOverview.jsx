@@ -3,7 +3,6 @@ import TourCard from "../features/tours/TourCard";
 
 export default function ToursOverview() {
   const { data: tours, isLoading, error } = useTours();
-  console.log(tours);
 
   if (isLoading) {
     return (
@@ -16,7 +15,7 @@ export default function ToursOverview() {
   if (error) {
     return (
       <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-200 text-center col-span-full font-medium">
-        Error loading tours: {error}
+        Error loading tours: {error.message}
       </div>
     );
   }

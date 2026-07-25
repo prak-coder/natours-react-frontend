@@ -10,7 +10,6 @@ export default function TourCard({ tour }) {
     locations,
     startLocation,
   } = tour;
-  console.log(tour);
   const dateStr = startDates
     ? new Date(startDates[0]).toLocaleDateString("en-US", {
         month: "long",
