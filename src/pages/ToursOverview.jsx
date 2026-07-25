@@ -1,8 +1,9 @@
-import { useTours } from "../hooks/useTours";
+import { useTours } from "../hooks/useToursData";
 import TourCard from "../features/tours/TourCard";
 
 export default function ToursOverview() {
-  const { tours, isLoading, error } = useTours();
+  const { data: tours, isLoading, error } = useTours();
+  console.log(tours);
 
   if (isLoading) {
     return (

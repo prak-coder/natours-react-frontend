@@ -1,19 +1,19 @@
-const API_URL = import.meta.env.VITE_API_URL || "";
+import apiClient from "./apiClient";
 
-export async function getTours() {
-  try {
-    // Works with either your direct .env URL or your Vite proxy configuration
-    const res = await fetch(`${API_URL}/api/v1/tours`);
+// 1. Get All Tours
+export async function getAllTours() {
+  const res = await apiClient.get("/tours");
+  return res.data.data?.data || [];
+}
 
-    if (!res.ok) throw new Error("Could not fetch tours data");
-    const jsonResponse = await res.json();
+// 2. Get Single Tour by ID
+export async function getTour(id) {
+  const res = await apiClient.get(`/tours/${id}`);
+  return res.data.data?.data || null;
+}
 
-    // 💡 THE EXACT FIX: Extracts the inner 'data' array field
-    const toursArray = jsonResponse.data?.data || [];
-
-    return toursArray;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
+// 3. Create a Tour (Headers are now automatically handled by the interceptor!)
+export async function createTour(tourData) {
+  const res = await apiClient.post("/tours", tourData);
+  return res.data.data?.data;
 }

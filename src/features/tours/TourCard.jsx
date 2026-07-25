@@ -12,7 +12,7 @@ export default function TourCard({ tour }) {
   } = tour;
   console.log(tour);
   const dateStr = startDates
-    ? new Date(startDates).toLocaleDateString("en-US", {
+    ? new Date(startDates[0]).toLocaleDateString("en-US", {
         month: "long",
         year: "numeric",
       })
