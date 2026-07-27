@@ -103,7 +103,12 @@ export default function MeDashboard() {
           Your Account Settings
         </h2>
 
-        <form onSubmit={handleSubmit} className="max-w-2xl flex flex-col gap-6">
+        {/* <form onSubmit={handleSubmit} className="max-w-2xl flex flex-col gap-6"> */}
+        <form
+          key={`${user?._id}-${user?.photo || "default"}`}
+          onSubmit={handleSubmit}
+          className="max-w-2xl flex flex-col gap-6"
+        >
           <div className="flex flex-col gap-2">
             <label className="text-xs font-bold uppercase tracking-wide text-gray-500">
               Name
@@ -134,6 +139,7 @@ export default function MeDashboard() {
               src={`${API_URL}/img/users/${user?.photo || "default.jpg"}`}
               alt="Current user avatar"
               className="h-16 w-16 rounded-full object-cover border border-gray-200 aspect-square shrink-0"
+              crossOrigin="use-credentials"
             />
             <label className="cursor-pointer text-natours-green border-b border-natours-green pb-0.5 hover:text-natours-green-dark hover:border-natours-green-dark text-sm font-medium transition-colors">
               Choose new photo

@@ -35,7 +35,8 @@ export default function Header() {
                 /* ⚡ FIX 2: Added API_URL prefix to pull image assets directly from your Node server */
                 src={`${API_URL}/img/users/${user.photo || "default.jpg"}`}
                 alt={`Photo of ${user.name}`}
-                className="h-9 w-9 aspect-square shrink-0 rounded-full object-cover border border-gray-600"
+                className="h-9 w-9 aspect-square shrink-0 rounded-full object-cover border border-gray-600 overflow-hidden"
+                crossOrigin="use-credentials"
               />
               <span>{user.name.split(" ")[0]}</span>
             </Link>

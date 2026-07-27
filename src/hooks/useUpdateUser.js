@@ -6,9 +6,10 @@ export function useUpdateUser() {
 
   return useMutation({
     mutationFn: updateMeApi,
-    onSuccess: (updatedUser) => {
+    onSuccess: () => {
       // ⚡ Instantly update your global context/cache with the brand new data
-      queryClient.setQueryData(["user"], updatedUser);
+      // queryClient.setQueryData(["user"], updatedUser);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       alert("🎉 Account configurations updated successfully!");
     },
     onError: (err) => {

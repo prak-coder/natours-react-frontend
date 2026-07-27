@@ -27,8 +27,7 @@ export async function signupApi({ name, email, password, passwordConfirm }) {
 export async function updateMeApi(formData) {
   const res = await apiClient.patch("/users/updateMe", formData, {
     headers: {
-      // ⚡ REQUIRED for Multer file uploads on your Express backend
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "multipart/form-data", // ⚡ Forces Axios to parse the FormData stream correctly
     },
   });
   return res.data.data.user;
