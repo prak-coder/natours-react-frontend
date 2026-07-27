@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useUpdateUser } from "../hooks/useUpdateUser";
+import { useUpdatePassword } from "../hooks/useUpdatePassword";
 
 export default function MeDashboard() {
   const { user } = useAuth();
@@ -12,6 +13,31 @@ export default function MeDashboard() {
   const [email, setEmail] = useState(user?.email || "");
   const [photo, setPhoto] = useState(null);
 
+  //  state for password change fields
+  const [passwordCurrent, setPasswordCurrent] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  // Hook for password update mutation (assumed matching your architecture)
+  const { mutate: updatePassword, isPending: isPasswordPending } =
+    useUpdatePassword();
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    // 🛡️ Client-side matching validation
+    if (password !== passwordConfirm) {
+      alert("Error: New password and confirm password do not match!");
+      return;
+    }
+
+    // Fire mutation sequence with text payload
+    updatePassword({ passwordCurrent, password, passwordConfirm });
+
+    // Clear inputs after triggering action
+    setPasswordCurrent("");
+    setPassword("");
+    setPasswordConfirm("");
+  };
   // Sync inputs with currently logged-in user profile context data
 
   const handleSubmit = (e) => {
@@ -132,6 +158,71 @@ export default function MeDashboard() {
               className="bg-natours-green hover:bg-natours-green-dark text-white text-sm font-medium py-3.5 px-8 rounded-full uppercase tracking-wider shadow-md transition-all active:scale-95 disabled:bg-gray-300"
             >
               {isPending ? "Saving changes..." : "Save Settings"}
+            </button>
+          </div>
+        </form>
+
+        {/* 🛠️ SEPARATOR LINE */}
+        <hr className="my-12 border-gray-600" />
+
+        {/* 🔐 PASSWORD CHANGE SECTION */}
+        <h2 className="text-2xl font-bold uppercase text-gradient tracking-wide mb-8">
+          Password Change
+        </h2>
+
+        <form
+          onSubmit={handlePasswordSubmit}
+          className="max-w-2xl flex flex-col gap-6"
+        >
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-bold uppercase tracking-wide text-gray-500">
+              Current password
+            </label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={passwordCurrent}
+              onChange={(e) => setPasswordCurrent(e.target.value)}
+              className="bg-gray-50 border border-gray-200 rounded px-4 py-3 text-sm focus:bg-white focus:border-natours-green outline-none transition-all"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-bold uppercase tracking-wide text-gray-500">
+              New password
+            </label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="bg-gray-50 border border-gray-200 rounded px-4 py-3 text-sm focus:bg-white focus:border-natours-green outline-none transition-all"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-bold uppercase tracking-wide text-gray-500">
+              Confirm password
+            </label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              className="bg-gray-50 border border-gray-200 rounded px-4 py-3 text-sm focus:bg-white focus:border-natours-green outline-none transition-all"
+              required
+            />
+          </div>
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={isPasswordPending}
+              className="bg-natours-green hover:bg-natours-green-dark text-white text-sm font-medium py-3.5 px-8 rounded-full uppercase tracking-wider shadow-md transition-all active:scale-95 disabled:bg-gray-300"
+            >
+              {isPasswordPending ? "Updating..." : "Save Password"}
             </button>
           </div>
         </form>

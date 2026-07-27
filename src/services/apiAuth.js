@@ -33,3 +33,16 @@ export async function updateMeApi(formData) {
   });
   return res.data.data.user;
 }
+// to update password for loggedin user
+export async function updatePasswordApi({
+  passwordCurrent,
+  password,
+  passwordConfirm,
+}) {
+  const response = await apiClient.patch("/users/updateMyPassword", {
+    currentPassword: passwordCurrent,
+    newPassword: password,
+    confirmPassword: passwordConfirm,
+  });
+  return response.data;
+}
