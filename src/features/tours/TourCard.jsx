@@ -18,9 +18,9 @@ export default function TourCard({ tour }) {
     : "June 2021";
 
   const difficultyColors = {
-    easy: "from-emerald-400 to-green-500",
-    medium: "from-emerald-400 to-green-500",
-    difficult: "from-green-400 to-emerald-600",
+    easy: "from-emerald-400 to-green-300",
+    medium: "from-emerald-400 to-green-600",
+    difficult: "from-green-400 to-emerald-800",
   };
 
   const currentGradient =
@@ -32,9 +32,9 @@ export default function TourCard({ tour }) {
       <div className="relative">
         <div className="h-52 bg-gradient-to-br from-emerald-400 to-green-500 relative [clip-path:polygon(0_0,100%_0,100%_85%,0_100%)]">
           <img
-            src={`/img/tours/${tour.imageCover || "default.jpg"}`}
+            src={`/images/tours/${tour.imageCover || "default.jpg"}`}
             alt={name}
-            className="w-full h-full object-cover opacity-15 mix-blend-overlay"
+            className="w-full h-full object-cover opacity-50 "
             onError={(e) => {
               e.target.style.display = "none";
             }} // Fallback if image path is missing
