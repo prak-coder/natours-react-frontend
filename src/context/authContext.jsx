@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { loginApi, getMeApi, signupApi } from "../services/apiauth";
+import { loginApi, getMeApi, signupApi } from "../services/apiAuth";
 
 export const AuthContext = createContext();
 
@@ -78,9 +78,14 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(false);
   };
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+    setIsAuthenticated(Boolean(updatedUser));
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, login, logout, signup }}
+      value={{ user, isAuthenticated, isLoading, login, logout, signup, updateUser }}
     >
       {children}
     </AuthContext.Provider>

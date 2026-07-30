@@ -1,14 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "./useAuth";
 import { updateMeApi } from "../services/apiAuth";
 
 export function useUpdateUser() {
   const queryClient = useQueryClient();
+  const { updateUser: updateAuthUser } = useAuth();
 
   return useMutation({
     mutationFn: updateMeApi,
-    onSuccess: () => {
-      // ⚡ Instantly update your global context/cache with the brand new data
-      // queryClient.setQueryData(["user"], updatedUser);
+    onSuccess: (updatedUser) => {
+      if (updatedUser) {
+        queryClient.setQueryData(["user"], updatedUser);
+        if (typeof updateAuthUser === "function") {
+          updateAuthUser(updatedUser);
+        }
+      }
       queryClient.invalidateQueries({ queryKey: ["user"] });
       alert("🎉 Account configurations updated successfully!");
     },
