@@ -13,8 +13,6 @@ export default function TourCard({ tour }) {
     startDates,
     locations,
     startLocation,
-    ratingsAverage,
-    imageCover,
   } = tour;
   const tourId = _id || id;
   const dateStr = startDates
