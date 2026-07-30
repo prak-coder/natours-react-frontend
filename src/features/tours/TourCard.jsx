@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function TourCard({ tour }) {
   const {
+    _id,
+    id,
     name,
     duration,
     maxGroupSize,
@@ -9,7 +13,10 @@ export default function TourCard({ tour }) {
     startDates,
     locations,
     startLocation,
+    ratingsAverage,
+    imageCover,
   } = tour;
+  const tourId = _id || id;
   const dateStr = startDates
     ? new Date(startDates[0]).toLocaleDateString("en-US", {
         month: "long",
@@ -99,9 +106,12 @@ export default function TourCard({ tour }) {
           </span>
         </div>
 
-        <button className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs uppercase font-medium px-6 py-3 rounded-full transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-0">
+        <Link
+          to={`tour/${tourId}`}
+          className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs uppercase font-medium px-6 py-3 rounded-full transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-0"
+        >
           Details
-        </button>
+        </Link>
       </div>
     </div>
   );
