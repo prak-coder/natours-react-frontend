@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAllTours, getTour, createTour } from "../services/apitours";
+import { getAllTours, getTour, createTour } from "../services/apiTours";
 
 // Hook for listing all tours
 export function useTours() {
