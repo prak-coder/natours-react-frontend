@@ -139,7 +139,6 @@ export default function MeDashboard() {
               src={`${API_URL}/img/users/${user?.photo || "default.jpg"}`}
               alt="Current user avatar"
               className="h-16 w-16 rounded-full object-cover border border-gray-200 aspect-square shrink-0"
-              crossOrigin="use-credentials"
             />
             <label className="cursor-pointer text-natours-green border-b border-natours-green pb-0.5 hover:text-natours-green-dark hover:border-natours-green-dark text-sm font-medium transition-colors">
               Choose new photo
