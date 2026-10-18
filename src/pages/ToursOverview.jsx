@@ -1,5 +1,6 @@
 import { useTours } from "../hooks/useToursData";
 import TourCard from "../features/tours/TourCard";
+import { Helmet } from "react-helmet-async";
 
 export default function ToursOverview() {
   const { data: tours, isLoading, error } = useTours();
@@ -7,6 +8,9 @@ export default function ToursOverview() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-20 col-span-full">
+        <Helmet>
+          <title>Natours | Loading Tours...</title>
+        </Helmet>
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-600"></div>
       </div>
     );
@@ -15,6 +19,9 @@ export default function ToursOverview() {
   if (error) {
     return (
       <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-200 text-center col-span-full font-medium">
+        <Helmet>
+          <title>Natours | Error Loading Tours</title>
+        </Helmet>
         Error loading tours: {error.message}
       </div>
     );
@@ -23,6 +30,9 @@ export default function ToursOverview() {
   if (tours.length === 0) {
     return (
       <p className="text-gray-500 text-center col-span-full py-20 font-medium">
+        <Helmet>
+          <title>Natours | No Tours Found</title>
+        </Helmet>
         No tours found. Check your database connections!
       </p>
     );
@@ -30,6 +40,9 @@ export default function ToursOverview() {
 
   return (
     <section className="bg-gray-50 py-24 px-4 font-sans">
+      <Helmet>
+        <title>Natours | Life Beyond Walls</title>
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         {/* <div className="text-center mb-20">
