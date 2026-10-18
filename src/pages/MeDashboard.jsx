@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useUpdateUser } from "../hooks/useUpdateUser";
 import { useUpdatePassword } from "../hooks/useUpdatePassword";
+import { Helmet } from "react-helmet-async";
 
 export default function MeDashboard() {
   const { user } = useAuth();
@@ -55,6 +56,9 @@ export default function MeDashboard() {
 
   return (
     <div className="max-w-6xl mx-auto my-16 bg-white min-h-[70vh] shadow-xl rounded-xl flex overflow-hidden font-sans">
+      <Helmet>
+        <title>Natours | Your account!</title>
+      </Helmet>
       {/* 🟢 LEFT SIDEBAR PANEL (Matches your graphic) */}
       {/* 🟢 NAVIGATION SIDEBAR CONTAINER */}
       <nav className="w-80 bg-gradient-to-b from-[#7ed56f] to-[#28b485] py-16 flex flex-col gap-4 font-sans select-none shrink-0">

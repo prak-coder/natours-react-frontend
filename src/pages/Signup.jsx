@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -34,6 +35,9 @@ export default function Signup() {
 
   return (
     <main className="min-h-[85vh] bg-natours-grey-light-1 flex items-center justify-center p-8 font-sans">
+      <Helmet>
+        <title>Natours | Create your account!</title>
+      </Helmet>
       <div className="bg-white max-w-xl w-full py-12 px-10 rounded-lg shadow-xl border border-gray-100">
         <h2 className="text-2xl font-bold uppercase text-gradient tracking-wider text-center mb-8">
           Create your account!
