@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function TourCard({ tour }) {
   const {
-    _id,
-    id,
+    // _id,
+    // id,
     name,
     slug,
     duration,
@@ -15,7 +15,7 @@ export default function TourCard({ tour }) {
     locations,
     startLocation,
   } = tour;
-  const tourId = _id || id;
+  // const tourId = _id || id;
   const dateStr = startDates
     ? new Date(startDates[0]).toLocaleDateString("en-US", {
         month: "long",
