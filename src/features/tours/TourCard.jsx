@@ -5,6 +5,7 @@ export default function TourCard({ tour }) {
     _id,
     id,
     name,
+    slug,
     duration,
     maxGroupSize,
     difficulty,
@@ -105,7 +106,7 @@ export default function TourCard({ tour }) {
         </div>
 
         <Link
-          to={`tour/${tourId}`}
+          to={`tour/${slug}`}
           className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs uppercase font-medium px-6 py-3 rounded-full transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-0"
         >
           Details
