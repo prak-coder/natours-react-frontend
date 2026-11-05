@@ -141,16 +141,16 @@ export default function TourDetails() {
             </div>
             <div className="flex justify-between border-b border-gray-50 pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Max Group Capacity
+                Participants
               </span>
               <span className="font-light">{tour.maxGroupSize} spots</span>
             </div>
             <div className="flex justify-between pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Investment
+                Rating
               </span>
               <span className="font-semibold text-emerald-600">
-                ${tour.price} USD
+                ${tour.ratingsAverage}/5
               </span>
             </div>
           </div>
