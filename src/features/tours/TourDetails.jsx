@@ -195,7 +195,7 @@ export default function TourDetails() {
             About {tour.name}
           </h2>
           <p className="text-[#777] font-light leading-relaxed mb-6 whitespace-pre-line text-sm md:text-base">
-            {tour.summary}
+            {tour.description}
           </p>
           <div className="mt-6">
             <Link
