@@ -129,25 +129,25 @@ export default function TourDetails() {
           <div className="space-y-5 text-sm text-gray-600">
             <div className="flex justify-between border-b border-gray-50 pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Next Date
+                📅 Next Date
               </span>
               <span className="font-light">{dateStr}</span>
             </div>
             <div className="flex justify-between border-b border-gray-50 pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Difficulty
+                📈 Difficulty
               </span>
               <span className="font-light capitalize">{tour.difficulty}</span>
             </div>
             <div className="flex justify-between border-b border-gray-50 pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Participants
+                👥Participants
               </span>
               <span className="font-light">{tour.maxGroupSize} spots</span>
             </div>
             <div className="flex justify-between pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
-                Rating
+                ⭐Rating
               </span>
               <span className="font-semibold text-emerald-600">
                 ${tour.ratingsAverage}/5
