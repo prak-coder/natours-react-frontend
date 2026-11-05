@@ -34,7 +34,7 @@ export default function TourDetails() {
 
         // 3. Chain the second fetch using the specific ID endpoint path parameter
         return fetch(
-          `"https://natours-backend-wfbl.onrender.com/api/v1/tours/${targetId}`,
+          `https://natours-backend-wfbl.onrender.com/api/v1/tours/${targetId}`,
         );
       })
       .then((res) => {
