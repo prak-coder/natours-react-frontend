@@ -13,7 +13,7 @@ export default function TourDetails() {
     let isMounted = true;
 
     // 2. Fetch the catalog list to map the slug parameter back into its internal Database ID
-    fetch("https://onrender.com")
+    fetch("https://natours-backend-wfbl.onrender.com/api/v1/tours")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load tour catalog indices.");
         return res.json();
@@ -33,7 +33,9 @@ export default function TourDetails() {
         const targetId = matchingTourItem._id || matchingTourItem.id;
 
         // 3. Chain the second fetch using the specific ID endpoint path parameter
-        return fetch(`https://onrender.com/${targetId}`);
+        return fetch(
+          `"https://natours-backend-wfbl.onrender.com/api/v1/tours/${targetId}`,
+        );
       })
       .then((res) => {
         if (!res) return;
