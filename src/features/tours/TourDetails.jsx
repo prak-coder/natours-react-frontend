@@ -150,7 +150,7 @@ export default function TourDetails() {
                 ⭐Rating
               </span>
               <span className="font-semibold text-emerald-600">
-                ${tour.ratingsAverage}/5
+                {Number(tour.ratingsAverage).toFixed(1)} / 5
               </span>
             </div>
           </div>
