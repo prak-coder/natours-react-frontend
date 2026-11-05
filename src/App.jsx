@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ToursOverview from "./pages/ToursOverview";
+// 1. Corrected import path according to your folder structure
+import TourDetails from "./features/tours/TourDetails";
+
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MeDashboard from "./pages/MeDashboard";
@@ -23,6 +26,9 @@ export default function App() {
           <Routes>
             {/* Base Route: Lists all tours */}
             <Route path="/" element={<ToursOverview />} />
+
+            {/* 2. Added dynamic slug route parameter */}
+            <Route path="/tour/:slug" element={<TourDetails />} />
 
             {/* Authentication Routes */}
             <Route path="/login" element={<Login />} />
