@@ -5,29 +5,48 @@ export default function TourDetails() {
   const { slug } = useParams();
   const [tour, setTour] = useState(null);
 
-  // Fix: Set initial state values to match the loading lifecycle
+  // 1. Initialize state values directly inside useState hooks to prevent synchronous updates during render cycles
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // Prevents race conditions if slug updates rapidly
+    let isMounted = true;
 
-    fetch(`https://onrender.com{slug}`)
+    // 2. Fetch the catalog list to map the slug parameter back into its internal Database ID
+    fetch("https://onrender.com")
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch tour details");
+        if (!res.ok) throw new Error("Failed to load tour catalog indices.");
         return res.json();
       })
       .then((resData) => {
         if (!isMounted) return;
 
-        const tourArray = resData.data?.data || resData.data;
-        const foundTour = Array.isArray(tourArray) ? tourArray[0] : tourArray;
+        const allTours = resData.data?.data || resData.data || [];
+        const matchingTourItem = allTours.find((t) => t.slug === slug);
 
-        if (!foundTour) {
-          throw new Error("Tour profile not found");
+        if (!matchingTourItem) {
+          throw new Error(
+            "Tour destination matching this link slug was not found.",
+          );
         }
 
-        setTour(foundTour);
+        const targetId = matchingTourItem._id || matchingTourItem.id;
+
+        // 3. Chain the second fetch using the specific ID endpoint path parameter
+        return fetch(`https://onrender.com/${targetId}`);
+      })
+      .then((res) => {
+        if (!res) return;
+        if (!res.ok)
+          throw new Error("Failed to pull deep tour data specifications.");
+        return res.json();
+      })
+      .then((individualData) => {
+        if (!isMounted || !individualData) return;
+
+        const tourProfile = individualData.data?.data || individualData.data;
+
+        setTour(tourProfile);
         setLoading(false);
       })
       .catch((err) => {
@@ -37,15 +56,15 @@ export default function TourDetails() {
       });
 
     return () => {
-      isMounted = false; // Cleanup subscription when component unmounts
+      isMounted = false;
     };
-  }, [slug]);
+  }, [slug]); // Safe trigger dependency array
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center font-sans bg-[#f7f7f7]">
         <div className="text-emerald-600 text-lg font-medium animate-pulse">
-          Loading tour specifications...
+          Loading tour specification details...
         </div>
       </div>
     );
