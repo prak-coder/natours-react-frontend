@@ -4,12 +4,13 @@ import { useParams, Link } from "react-router-dom";
 export default function TourDetails() {
   const { slug } = useParams();
   const [tour, setTour] = useState(null);
+
+  // Fix: Set initial state values to match the loading lifecycle
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    let isMounted = true; // Prevents race conditions if slug updates rapidly
 
     fetch(`https://onrender.com{slug}`)
       .then((res) => {
@@ -17,20 +18,27 @@ export default function TourDetails() {
         return res.json();
       })
       .then((resData) => {
-        // Correct parsing: API filters return an array inside data.data
+        if (!isMounted) return;
+
         const tourArray = resData.data?.data || resData.data;
         const foundTour = Array.isArray(tourArray) ? tourArray[0] : tourArray;
 
         if (!foundTour) {
           throw new Error("Tour profile not found");
         }
+
         setTour(foundTour);
         setLoading(false);
       })
       .catch((err) => {
+        if (!isMounted) return;
         setError(err.message);
         setLoading(false);
       });
+
+    return () => {
+      isMounted = false; // Cleanup subscription when component unmounts
+    };
   }, [slug]);
 
   if (loading) {
