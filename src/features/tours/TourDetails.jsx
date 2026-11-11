@@ -126,7 +126,7 @@ export default function TourDetails() {
           <h2 className="text-xl font-light uppercase tracking-wide text-emerald-600 mb-8 border-b border-gray-100 pb-4">
             Quick Facts
           </h2>
-          <div className="space-y-5 text-sm text-gray-600">
+          <div className="space-y-3 text-sm text-gray-600">
             <div className="flex justify-between border-b border-gray-50 pb-3">
               <span className="font-medium text-gray-400 uppercase text-xs">
                 📅 Next Date
