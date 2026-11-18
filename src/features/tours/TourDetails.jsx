@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import TourCta from "./TourCta";
 
 export default function TourDetails() {
   const { slug } = useParams();
@@ -207,6 +208,7 @@ export default function TourDetails() {
           </div>
         </div>
       </section>
+      <TourCta />
     </main>
   );
 }
