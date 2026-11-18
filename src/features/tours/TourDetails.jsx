@@ -208,7 +208,7 @@ export default function TourDetails() {
           </div>
         </div>
       </section>
-      <TourCta />
+      <TourCta tour={tour} />
     </main>
   );
 }
