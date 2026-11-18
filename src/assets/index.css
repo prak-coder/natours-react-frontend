@@ -24,7 +24,12 @@ body {
   -webkit-font-smoothing: antialiased;
   /* padding: 2rem; */
 }
-
+.leaflet-container img.leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+  width: 256px !important;
+  height: 256px !important;
+}
 /* Reusable Utilities (Example: Header Gradient Text) */
 @utility text-gradient {
   background-clip: text;
